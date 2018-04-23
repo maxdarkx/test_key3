@@ -31,9 +31,9 @@ end entity test_top;
 	
 
 architecture test_design of test_top is
-	constant lw1:	integer:=4;
-	constant dw1:	integer:=32;
-	constant dl1:	integer:=64;
+	constant lw1:	integer:=2;
+	constant dw1:	integer:=20;
+	constant dl1:	integer:=20;
 
 	component display is
 	Generic (   
@@ -54,8 +54,8 @@ architecture test_design of test_top is
 
 	component deco is
 	Port(  
-		val:	 	in   std_logic_vector (4 downto 0);
-        seg: 	 	out  std_logic_vector (7 downto 0)
+		val:	 in   std_logic_vector (4 downto 0);
+        seg: 	 out  std_logic_vector (7 downto 0)
     );
 	end component;
 
@@ -93,15 +93,15 @@ architecture test_design of test_top is
 		);
   	end component;
 
-  	component data_recover_sm is --maquina de estados para el guardado de los datos en un array de tipo entero
-	port(
-		clk:		in 	   	std_logic;						--reloj de entrada, agregar un divisor de reloj
-		data_in: 	in 		std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
-		ready_in: 	in 		std_logic;						--los bits de entrada estan listos para ser leidos
-		data_out: 	out   	logic_array;				--el array de salida 
-		ready_out: 	out 	std_logic_vector(3 downto 0) 						--el array de salida esta listo para ser leido
-	);
-	end component;
+--  	component data_recover_sm is --maquina de estados para el guardado de los datos en un array de tipo entero
+--	port(
+--		clk:		in 	   	std_logic;						--reloj de entrada, agregar un divisor de reloj
+--		data_in: 	in 		std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
+--		ready_in: 	in 		std_logic;						--los bits de entrada estan listos para ser leidos
+--		data_out: 	out   	logic_array;				--el array de salida 
+--		ready_out: 	out 	std_logic_vector(3 downto 0) 						--el array de salida esta listo para ser leido
+--	);
+--	end component;
 
 	component digits_show is
 	generic (
@@ -109,12 +109,14 @@ architecture test_design of test_top is
 		dw: integer:= dw1;
 		lw: integer:= lw1
 	);
-	port(	
-		number: 	in  logic_array;
-		hcount: 	in  std_logic_vector(10 downto 0);
-	    vcount: 	in  std_logic_vector(10 downto 0);
-		posx:	 	out	integer;
-		posy:		out integer;
+	port(
+		number1: 	 	 in  std_logic_vector(51 downto 0);
+		number2: 	 	 in  std_logic_vector(51 downto 0);
+		number_sol: 	 in  std_logic_vector(51 downto 0);
+		hcount:      in  std_logic_vector(10 downto 0);
+	   vcount:      in  std_logic_vector(10 downto 0);
+		posx: 		 out integer;
+		posy:		 	 out integer;
 		value:		 out std_logic_vector(4 downto 0)
 	);
 	end component;
@@ -126,7 +128,8 @@ architecture test_design of test_top is
   	signal val: std_logic_vector(4 downto 0);
   	signal col: std_logic_vector(3 downto 0);
   	signal b: std_logic;
-  	signal numero: std_logic_vector(47 downto 0);
+
+  	signal numero1, numero2, numero_sol: std_logic_vector(51 downto 0);
   	signal tposx: integer;
   	signal tposy: integer;
   	signal val1: std_logic_vector(4 downto 0);
@@ -177,20 +180,23 @@ begin
 		out_on			=> b
 	);
 
-	sending_data: data_recover_sm
-	port map
-	(
-		clk				=>clk,		
-		data_in			=>val,
-		ready_in		=>b,
-		data_out		=>, 
-		ready_out		=>status
-	);
+--	sending_data: data_recover_sm
+--	port map
+--	(
+--		clk				=>clk,		
+--		data_in			=>val,
+--		ready_in		=>b,
+--		data_out1		=>numero1, 
+--		data_out2		=>numero2, 
+--		ready_out		=>status
+--	);
 
 	display_data: digits_show
 	port map
 	(
-		number			=> mantisa,
+		number1			=> numero1,
+		number2			=> numero2,
+		number_sol		=> numero_sol,
 		hcount 			=> hcount1,
 		vcount 			=> vcount1,
 		posx 			=> tposx,

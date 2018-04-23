@@ -102,17 +102,17 @@ begin
 					when s4 =>
 						next_state <= s0;--ir a proximo estado y set salida
 						B <= '0';
-						out_data<="11111";--nothing
+						out_data<="10000";--nothing
 					when s0 =>
 						
 						if ( col_line_in = "0001") then
-							out_data<="01101";	--D
+							out_data<="11101";	--D
 							B<='1';
 						elsif (col_line_in = "0010")then
-							out_data<= "01110";--#
+							out_data<= "11110";--#
 							B<='1';
 						elsif (col_line_in ="0100") then
-							out_data<= "10001";--0
+							out_data<= "00000";--0
 							B<='1';
 						elsif (col_line_in ="1000") then
 							out_data<= "01111";--*
@@ -125,7 +125,7 @@ begin
 							if col_line_in="0000" then
 								B<='0';
 								next_state <=s1;
-								out_data<="11111";--nothing
+								out_data<="10000";--nothing
 							else
 								next_state <= s0;	--Si aqui no esta el dato se va a otro estado
 							end if;
@@ -133,7 +133,7 @@ begin
 											
 				when s1 =>
 					if ( col_line_in = "0001") then
-						out_data<="01100";--C
+						out_data<="11100";--C
 						B<='1';
 					elsif (col_line_in = "0010")then
 						out_data<="01001";--9
@@ -152,7 +152,7 @@ begin
 							if col_line_in="0000" then
 								B<='0';
 								next_state <=s2;
-								out_data<="11111";--nothing
+								out_data<="10000";--nothing
 							else
 								next_state <= s1;	--Si aqui no esta el dato se va a otro estado
 							end if;
@@ -160,7 +160,7 @@ begin
 
 				when s2 =>
 					if ( col_line_in = "0001") then
-						out_data<="01011";--B
+						out_data<="11011";--B
 						B<='1';
 					elsif (col_line_in = "0010")then
 						out_data<="00110";--6
@@ -179,7 +179,7 @@ begin
 							if col_line_in="0000" then
 								B<='0';
 								next_state <= s3;
-								out_data<="11111";--nothing
+								out_data<="10000";--nothing
 							else
 								next_state <= s2;	--Si aqui no esta el dato se va a otro estado
 							end if;
@@ -187,7 +187,7 @@ begin
 
 				when s3 =>
 					if ( col_line_in = "0001") then
-						out_data<="01010";--A
+						out_data<="11010";--A
 						B<='1';
 					elsif (col_line_in = "0010")then
 						out_data<="00011";--3
@@ -205,7 +205,7 @@ begin
 							if col_line_in="0000" then
 								B<='0';
 								next_state <=s0;
-								out_data<="11111";--nothing
+								out_data<="10000";--nothing
 							else
 								next_state <= s3;	--Si aqui no esta el dato se va a otro estado
 							end if;

@@ -288,7 +288,7 @@ clk_div:process(clk,clk_500hz)
 			end if;
 		when s211 =>
 			if ready_in='1' and data_in(4)='0'then
-					if point2='0' and data_in="01010" then
+				if point2='0' and data_in="01010" then
 					f_state<=s212;
 				else
 					f_state<=s211;
@@ -328,79 +328,266 @@ clk_div:process(clk,clk_500hz)
 						data_out1(3 downto 0)<=data_in;
 					end if;
 				else
-					data_out1(3 downto 0)<=data_in;
+					if data_in(4)='0' then
+						data_out1(3 downto 0)<=data_in;
+					else
+						data_out1(3 downto 0)<=data_out1(3 downto 0);
+					end if;
 				end if;
 				ready_out<="0010";
 			when s2 =>
-				data_out1(7 downto 4)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(7 downto 4)<=data_in;
+					end if;
+				else
+					if data_in(4)='0' then
+						data_out1(7 downto 4)<=data_in;
+					else
+						data_out1(7 downto 4)<=data_out1(7 downto 4);
+					end if;
+					
+				end if;	
 				ready_out<="0011";
 			when s3 =>
-				data_out1(11 downto 8)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(11 downto 8)<=data_in;
+					end if;
+				else
+
+					data_out1(11 downto 8)<=data_in;
+				end if;	
 				ready_out<="0100";
 			when s4 =>
-				data_out1(15 downto 12)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(15 downto 12)<=data_in;
+					end if;
+				else
+					if data_in(4)='0' then
+						data_out1(15 downto 12)<=data_in;
+					else
+						data_out1(15 downto 12)<=data_out1(15 downto 12);
+					end if;
+				end if;
 				ready_out<="0101";
 			when s5 =>
-				data_out1(19 downto 16)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(19 downto 16)<=data_in;
+					end if;
+				else
+					if data_in(4)='0' then
+						data_out1(19 downto 16)<=data_in;
+					else
+						data_out1(19 downto 16)<=data_out1(19 downto 16);
+					end if;
+				end if;
 				ready_out<="0110";
 			when s6 =>
-				data_out1(23 downto 20)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(23 downto 20)<=data_in;
+					end if;
+				else
+					if data_in(4)='0' then
+						data_out1(23 downto 20)<=data_in;
+					else
+				end if;
 				ready_out<="0111";
 			when s7 =>
-				data_out1(27 downto 24)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(27 downto 24)<=data_in;
+					end if;
+				else
+					data_out1(27 downto 24)<=data_in;
+				end if;
 				ready_out<="1000";
 			when s8 =>
-				data_out1(31 downto 28)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(31 downto 28)<=data_in;
+					end if;
+				else
+					data_out1(31 downto 28)<=data_in;
+				end if;
 				ready_out<="1001";
 			when s9 =>
-				data_out1(35 downto 32)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(35 downto 32)<=data_in;
+					end if;
+				else
+					data_out1(35 downto 32)<=data_in;
+				end if;
+				
 				ready_out<="1010";
 			when s10 =>
-				data_out1(39 downto 36)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(39 downto 36)<=data_in;
+					end if;
+				else
+					data_out1(39 downto 36)<=data_in;
+				end if;
+				
 				ready_out<="0110";
 			when s11 =>
-				data_out1(43 downto 40)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(43 downto 40)<=data_in;
+					end if;
+				else
+					data_out1(43 downto 40)<=data_in;
+				end if;
 				ready_out<="0111";
 			when s12 =>
-				data_out1(47 downto 44)<=data_in;
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(47 downto 44)<=data_in;
+					end if;
+				else
+					data_out1(47 downto 44)<=data_in;
+				end if;
 				ready_out<="1000";
 
+
 			when s20 =>
-				data_out(3 downto 0)<=data_in;
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(3 downto 0)<=data_in;
+					end if;
+				else
+					data_out2(3 downto 0)<=data_in;
+				end if;
 				ready_out<="0010";
 			when s21 =>
-				data_out(7 downto 4)<=data_in;
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(7 downto 4)<=data_in;
+					end if;
+				else
+					data_out2(7 downto 4)<=data_in;
+				end if;	
 				ready_out<="0011";
-			when s3 =>
-				data_out(11 downto 8)<=data_in;
+			when s22 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(11 downto 8)<=data_in;
+					end if;
+				else
+					data_out2(11 downto 8)<=data_in;
+				end if;	
 				ready_out<="0100";
-			when s4 =>
-				data_out(15 downto 12)<=data_in;
+			when s23 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(15 downto 12)<=data_in;
+					end if;
+				else
+					data_out2(15 downto 12)<=data_in;
+				end if;
 				ready_out<="0101";
-			when s5 =>
-				data_out(19 downto 16)<=data_in;
+			when s24 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(19 downto 16)<=data_in;
+					end if;
+				else
+						data_out2(19 downto 16)<=data_in;
+				end if;
 				ready_out<="0110";
-			when s6 =>
-				data_out(23 downto 20)<=data_in;
+			when s25 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(23 downto 20)<=data_in;
+					end if;
+				else
+					data_out2(23 downto 20)<=data_in;
+				end if;
 				ready_out<="0111";
-			when s7 =>
-				data_out(27 downto 24)<=data_in;
+			when s26 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(27 downto 24)<=data_in;
+					end if;
+				else
+					data_out2(27 downto 24)<=data_in;
+				end if;
 				ready_out<="1000";
-			when s8 =>
-				data_out(31 downto 28)<=data_in;
+			when s27 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(31 downto 28)<=data_in;
+					end if;
+				else
+					data_out2(31 downto 28)<=data_in;
+				end if;
 				ready_out<="1001";
-			when s9 =>
-				data_out(35 downto 32)<=data_in;
+			when s28 =>
+				if data_in = "01010" then
+					if point2='0' then
+						point2<='1';
+						data_out2(35 downto 32)<=data_in;
+					end if;
+				else
+					data_out2(35 downto 32)<=data_in;
+				end if;
+				
 				ready_out<="1010";
-			when s10 =>
-				data_out(39 downto 36)<=data_in;
+			when s29 =>
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(39 downto 36)<=data_in;
+					end if;
+				else
+					data_out1(39 downto 36)<=data_in;
+				end if;
+				
 				ready_out<="0110";
-			when s11 =>
-				data_out(43 downto 40)<=data_in;
+			when s210 =>
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(43 downto 40)<=data_in;
+					end if;
+				else
+					data_out1(43 downto 40)<=data_in;
+				end if;
 				ready_out<="0111";
-			when s12 =>
-				data_out(47 downto 44)<=data_in;
+			when s211 =>
+				if data_in = "01010" then
+					if point1='0' then
+						point1<='1';
+						data_out1(47 downto 44)<=data_in;
+					end if;
+				else
+					data_out1(47 downto 44)<=data_in;
+				end if;
 				ready_out<="1000";
+
 		end case;
 	end process;
 
