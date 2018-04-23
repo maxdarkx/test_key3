@@ -64,9 +64,9 @@ architecture Behavioral of digits_show is
 	constant th: integer := 640;
 	constant tv: integer := 480;
     --"numero (8+4)"+ "punto(1)" + "operacion (1)"=14
-	constant CC1 : integer := 13; 	-- cantidad de letras para primera fila (14) 
-	constant CC2 : integer := 12; 	-- cantidad de letras para segunda fila (13) 
-    constant CC3 : integer := 12; 	-- cantidad de letras para ultima fila (13) 
+	constant CC1 : integer := 14; 	-- cantidad de letras para primera fila (14) 
+	constant CC2 : integer := 13; 	-- cantidad de letras para segunda fila (13) 
+    constant CC3 : integer := 13; 	-- cantidad de letras para ultima fila (13) 
 	
 	
 	constant RESET_DATA: std_logic_vector(7 downto 0):=(others=>'0');
@@ -79,6 +79,7 @@ print: process(hcount,vcount)
 	variable EVU : integer; -- espacio vertical utilizado
 	variable EHU1: integer; -- Espacio horizontal total utilizado fila 1 
 	variable EHU2: integer; -- Espacio horizontal total utilizado fila 2
+	variable EHU3: integer; -- Espacio horizontal total utilizado fila 3
 	variable px1,px10,px11,px12,px13,px14,px15,px16,px17,px18,px19,px110,px111,px112,px113,px101: integer:=0;
 	variable px2,px20,px21,px22,px23,px24,px25,px26,px27,px28,px29,px210,px211,px212,px213,px201: integer:=0;
 	variable px3,px30,px31,px32,px33,px34,px35,px36,px37,px38,px39,px310,px311,px312,px313,px301: integer:=0;
@@ -89,17 +90,17 @@ begin
 	--centrado vertical y horizontalmente
 	EVU:= 2*(dh+esh);
 	EHU1:= cc1*(dl+esh) ;
-	EHU2:= cc1*(dl+esh) ;
+	EHU2:= cc2*(dl+esh) ;
+	EHU3:= cc3*(dl+esh) ;
+	
 	px1 := (th-ehu1)/2 ;
 	px2 := (th-ehu2)/2;
-	px3 := (th-ehu2)/2;
+	px3 := (th-ehu3)/2;
 
 	py1 := (tv - EVU)/2;
 	py2:=py1+dh+esl;											   
 	py3:=py1+2*dh+esl;
-	py3:=py1+3*dh+esl;
-	py3:=py1+4*dh+esl;
-	
+	py4:=py1+3*dh+esl;	
 
 	--simbolos para primer operando
 	px10:= px1;
@@ -247,7 +248,7 @@ begin
 		end if;
 
 
-	elsif vcount > py3 and vcount <py4 then --resultado
+	elsif vcount > py3 and vcount < py4 then --resultado
 		posy<=py3;
 		
 	if hcount>px30 and hcount<px31 then

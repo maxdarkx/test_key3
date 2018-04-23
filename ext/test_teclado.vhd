@@ -38,18 +38,16 @@ END test_teclado;
 ARCHITECTURE behavior OF test_teclado IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
-  component test_top is
-  port(
-    clk:      in  std_logic;            --reloj interno fpga, mirar manual
-    rst:      in  std_logic;            --boton reset
-    filas:    out std_logic_vector(3 downto 0); --filas para el teclado
-    columnas:   in  std_logic_vector(3 downto 0); --columnas para el teclado
-    led:      out std_logic_vector(7 downto 0);
-    hs:       out std_logic;            --senales para la pantalla
-    vs:       out std_logic;
-    rgb:      out std_logic_vector(7 downto 0)
-  );
-  end component;
+ 
+    COMPONENT driver_teclado_completo
+    PORT(
+         clk : IN  std_logic;
+         rst : IN  std_logic;
+         filas : OUT  std_logic_vector(3 downto 0);
+         columnas : IN  std_logic_vector(3 downto 0);
+         salida : OUT  std_logic_vector(4 downto 0)
+        );
+    END COMPONENT;
     
 
    --Inputs
@@ -60,56 +58,43 @@ ARCHITECTURE behavior OF test_teclado IS
  	--Outputs
    signal filas : std_logic_vector(3 downto 0);
    signal salida : std_logic_vector(4 downto 0);
-	signal j: integer range 0 to 3;
+
    -- Clock period definitions
    constant clk_period : time := 10 ns;
  
 BEGIN
-  -- Instantiate the Unit Under Test (UUT)
-  -- Clock process definitions
-  clk_process: process
-  begin
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: driver_teclado_completo PORT MAP (
+          clk => clk,
+          rst => rst,
+          filas => filas,
+          columnas => columnas,
+          salida => salida
+        );
 
-	 clk <= '0';
-	 wait for clk_period/2;
-	 clk <= '1';
-	 wait for clk_period/2;
-  end process;
+   -- Clock process definitions
+   clk_process :process
+   begin
+		clk <= '0';
+		wait for clk_period/2;
+		clk <= '1';
+		wait for clk_period/2;
+   end process;
  
 
    -- Stimulus process
    stim_proc: process
    begin		
    
-		wait for 45ms;
+	wait for 80ms;
+	columnas <= "0010";
+	wait for 40 ms;
+	columnas <="0000";
 
-    for i in 0 to 120 loop
-      if j=3 then
-          j<=0;
-        else
-          j<=j+1;
-        end if;
-      if j=0 then  
-        columnas <= "0010";
-      else
-        columnas <="0000";
-      end if;
-  		wait for 10ms;
-    end loop; 
+      -- insert stimulus here 
+
+      wait;
    end process;
-  
 
-  tst: test_top
-  port map(
-          clk       => clk,
-          rst       => rst,
-          filas     => filas,
-          columnas  => columnas,
-          led       => open,
-          hs        => open,
-          rgb       => open
-  );
-
-
-
-end behavior;
+END;
