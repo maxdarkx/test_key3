@@ -126,7 +126,7 @@ architecture test_design of test_top is
   	signal val: std_logic_vector(4 downto 0);
   	signal col: std_logic_vector(3 downto 0);
   	signal b: std_logic;
-  	signal mantisa: logic_array;
+  	signal numero: std_logic_vector(47 downto 0);
   	signal tposx: integer;
   	signal tposy: integer;
   	signal val1: std_logic_vector(4 downto 0);
@@ -183,7 +183,7 @@ begin
 		clk				=>clk,		
 		data_in			=>val,
 		ready_in		=>b,
-		data_out		=>mantisa, 
+		data_out		=>, 
 		ready_out		=>status
 	);
 

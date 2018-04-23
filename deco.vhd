@@ -22,12 +22,12 @@ begin
 					"1110000" when "00111", --7
 					"1111111" when "01000", --8
 					"1110011" when "01001", --9
-					"1110111" when "01010", --A
-					"0011110" when "01011", --B
-					"1001110" when "01100", --C
-					"0111110" when "01101", --D
-					"1001111" when "01110", --# 'E'
-					"1000111" when "01111", --* 'F'
-					"0000000" when "11111", -- display apagado
+					"1110111" when "11010", --A reservado para suma
+					"0000001" when "11011", --B reservado para resta
+					"1001110" when "11100", --C reservado para multiplicacion
+					"0111110" when "11101", --D reservado para division
+					"1001111" when "11110", --# 'E' reservado para igual
+					"1000111" when "01111", --* 'F' reservado para punto
+					"0000000" when "10000", -- display apagado
 					"0000000" when others;
 end behavioral;
