@@ -5,8 +5,8 @@ use work.array_machine.all;
 
 entity data_recover_sm is --maquina de estados para el guardado de los datos en un array de tipo entero
 port(
-		clk:			in 	   std_logic;						--reloj de entrada, agregar un divisor de reloj
-		rst:			in 	   std_logic;
+		rst:		in 	   std_logic;
+		clk:		in 	   std_logic;						--reloj de entrada, agregar un divisor de reloj
 		data_in: 	in 	std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
 		ready_in: 	in 	std_logic;						--los bits de entrada estan listos para ser leidos
 		data_out: 	out   logic_array;				--el array de salida 

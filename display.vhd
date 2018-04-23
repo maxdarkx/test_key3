@@ -90,25 +90,25 @@ DISPLAY: process(seg,HCOUNT,VCOUNT,POSX,POSY)
 
 	
 		-- segmento a
-		if(seg(6)='1' and (HCOUNT>SHX1)and(HCOUNT<SHX2)and(VCOUNT>SHY1)and(VCOUNT<SHY2)) then
+		if(seg(6)='1' and (HCOUNT>=SHX1)and(HCOUNT<=SHX2)and(VCOUNT>=SHY1)and(VCOUNT<=SHY2)) then
 			PAINT <= '1';
 		-- segmento g
-		elsif (seg(0)='1' and (HCOUNT>SHX1)and(HCOUNT<SHX2)and(VCOUNT>SHY3)and(VCOUNT<SHY4)) then
+		elsif (seg(0)='1' and (HCOUNT>=SHX1)and(HCOUNT<=SHX2)and(VCOUNT>=SHY3)and(VCOUNT<=SHY4)) then
 			PAINT <= '1';
 		-- segmento d
-		elsif (seg(3)='1' and (HCOUNT>SHX1)and(HCOUNT<SHX2)and(VCOUNT>SHY5)and(VCOUNT<SHY6)) then
+		elsif (seg(3)='1' and (HCOUNT>=SHX1)and(HCOUNT<=SHX2)and(VCOUNT>=SHY5)and(VCOUNT<=SHY6)) then
 			PAINT <= '1';
 		-- segmento b
-		elsif (seg(5)='1' and (HCOUNT>SVX3)and(HCOUNT<SVX4)and(VCOUNT>SVY1)and(VCOUNT<SVY2)) then
+		elsif (seg(5)='1' and (HCOUNT>=SVX3)and(HCOUNT<=SVX4)and(VCOUNT>=SVY1)and(VCOUNT<=SVY2)) then
 			PAINT <= '1';
 		-- segmento c
-		elsif (seg(4)='1' and (HCOUNT>SVX3)and(HCOUNT<SVX4)and(VCOUNT>SVY3)and(VCOUNT<SVY4)) then
+		elsif (seg(4)='1' and (HCOUNT>=SVX3)and(HCOUNT<=SVX4)and(VCOUNT>=SVY3)and(VCOUNT<=SVY4)) then
 			PAINT <= '1';
 		-- segmento f
-		elsif (seg(1)='1' and (HCOUNT>SVX1)and(HCOUNT<SVX2)and(VCOUNT>SVY1)and(VCOUNT<SVY2)) then
+		elsif (seg(1)='1' and (HCOUNT>=SVX1)and(HCOUNT<=SVX2)and(VCOUNT>=SVY1)and(VCOUNT<=SVY2)) then
 			PAINT <= '1';
 		-- segmento e
-		elsif (seg(2)='1' and (HCOUNT>SVX1)and(HCOUNT<SVX2)and(VCOUNT>SVY3)and(VCOUNT<SVY4)) then
+		elsif (seg(2)='1' and (HCOUNT>=SVX1)and(HCOUNT<=SVX2)and(VCOUNT>=SVY3)and(VCOUNT<=SVY4)) then
 			PAINT <= '1';
 		else
 			PAINT <= '0';

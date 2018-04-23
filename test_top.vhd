@@ -84,8 +84,8 @@ architecture test_design of test_top is
 
 	component Driver is
     Port (
-			clk:	 		in  std_logic;
-            rst: 			in  std_logic;
+			clk:	 		in  STD_LOGIC;
+            rst: 			in  STD_LOGIC;
             col_line_in: 	in  std_logic_vector(3 downto 0);
 		  	row_line_out: 	out std_logic_vector(3 downto 0);
 			out_data : 		out std_logic_vector(4 downto 0);
@@ -96,7 +96,6 @@ architecture test_design of test_top is
   	component data_recover_sm is --maquina de estados para el guardado de los datos en un array de tipo entero
 	port(
 		clk:		in 	   	std_logic;						--reloj de entrada, agregar un divisor de reloj
-		rst: 		in 		std_logic;
 		data_in: 	in 		std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
 		ready_in: 	in 		std_logic;						--los bits de entrada estan listos para ser leidos
 		data_out: 	out   	logic_array;				--el array de salida 
@@ -106,9 +105,9 @@ architecture test_design of test_top is
 
 	component digits_show is
 	generic (
-		dl: integer:=50 ;
-		dh: integer:=100;
-		lw: integer:=5
+		dl: integer:= dl1;
+		dw: integer:= dw1;
+		lw: integer:= lw1
 	);
 	port(	
 		number: 	in  logic_array;
@@ -181,21 +180,14 @@ begin
 	sending_data: data_recover_sm
 	port map
 	(
-		clk				=> clk,	
-		rst 			=> rst,	
-		data_in			=> val,
-		ready_in		=> b,
-		data_out		=> mantisa, 
-		ready_out		=> status
+		clk				=>clk,		
+		data_in			=>val,
+		ready_in		=>b,
+		data_out		=>mantisa, 
+		ready_out		=>status
 	);
 
 	display_data: digits_show
-	generic map
-	(
-		dl					=> dl1,
-		dh					=> dw1,
-		lw					=> lw1
-	)
 	port map
 	(
 		number			=> mantisa,

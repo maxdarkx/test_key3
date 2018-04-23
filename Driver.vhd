@@ -46,7 +46,7 @@ entity Driver is
             col_line_in: 		in std_logic_vector(3 downto 0);
 			row_line_out: 		out std_logic_vector(3 downto 0);
 			out_data : 			out std_logic_vector(4 downto 0);
-			out_on:				out std_logic
+			out_on:			out std_logic
 		);
 end Driver;
 architecture Behavioral of Driver is
@@ -63,7 +63,7 @@ signal count: std_logic_vector(3 downto 0);
 signal valor : std_logic_vector(3 downto 0);
 signal flag,r: std_logic:='0';
 --
-signal counter,counter1:integer:=0;
+signal counter:integer:=0;
 begin
 
 	clk_div:process(clk,clk_500hz)
@@ -82,9 +82,9 @@ begin
 
 
 	--logica del estado presente
-		SYNC_PROC: process(clk_500hz)
+		SYNC_PROC: process(clk)
 		begin
-		if (rising_edge(clk_500hz)) then
+		if (rising_edge(clk)) then
 			if (rst = '1') then
 				current_state <= s4;
 				count <= "0000";
@@ -235,25 +235,17 @@ begin
 	end process OUTPUT_DECODE;
 
 
-debounce_b: process(clk)
+debounce_b: process(clk_500hz)
 begin
-	if(rising_edge(clk))then
-		if(B='1')then
-			if counter1=0 then
-				r<='1';
-			else
-				r<='0';
-
-				if counter1=500000 then
-					counter1<=0;
-				else
-					counter1<=counter1 + 1;
-				end if;
-			end if;
-		else
+	if(rising_edge(clk_500hz))then
+		if(B='1' and flag='0')then
+			r<='1';
+			flag<='1';
+		elsif(B='1' and flag='1') then
 			r<='0';
-			counter1<=0;
-		end if;		
+		elsif(B='0') then
+			flag<='0';
+		end if;
 	end if;
 end process;
 
