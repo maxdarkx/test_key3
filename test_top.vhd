@@ -93,15 +93,15 @@ architecture test_design of test_top is
 		);
   	end component;
 
---  	component data_recover_sm is --maquina de estados para el guardado de los datos en un array de tipo entero
---	port(
---		clk:		in 	   	std_logic;						--reloj de entrada, agregar un divisor de reloj
---		data_in: 	in 		std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
---		ready_in: 	in 		std_logic;						--los bits de entrada estan listos para ser leidos
---		data_out: 	out   	logic_array;				--el array de salida 
---		ready_out: 	out 	std_logic_vector(3 downto 0) 						--el array de salida esta listo para ser leido
---	);
---	end component;
+  	component data_save is --maquina de estados para el guardado de los datos en un array de tipo entero
+	port(
+		clk:		in 	   	std_logic;						--reloj de entrada, agregar un divisor de reloj
+		data_in: 	in 		std_logic_vector(4 downto 0);	--bits de entrada directos del teclado numerico
+		ready_in: 	in 		std_logic;						--los bits de entrada estan listos para ser leidos
+		data_out: 	out   	logic_array;				--el array de salida 
+		ready_out: 	out 	std_logic_vector(3 downto 0) 						--el array de salida esta listo para ser leido
+	);
+	end component;
 
 	component digits_show is
 	generic (
@@ -180,16 +180,16 @@ begin
 		out_on			=> b
 	);
 
---	sending_data: data_recover_sm
---	port map
---	(
---		clk				=>clk,		
---		data_in			=>val,
---		ready_in		=>b,
---		data_out1		=>numero1, 
---		data_out2		=>numero2, 
---		ready_out		=>status
---	);
+	sending_data: data_save
+	port map
+	(
+		clk				=>clk,		
+		data_in			=>val,
+		ready_in			=>b,
+		data_out1		=>numero1, 
+		data_out2		=>numero2, 
+		ready_out		=>status
+	);
 
 	display_data: digits_show
 	port map

@@ -199,6 +199,8 @@ begin
 		elsif hcount>px113 and hcount<px101 then --espacio reservado para la operacion
 			posx<=px113;
 			value<="10000";
+		else
+			null;
 		end if;
 
 
@@ -245,6 +247,8 @@ begin
 		elsif hcount>px212 and hcount<px201 then
 			posx<=px212;
 			value<='0' & number2(51 downto 48);
+		else
+			null;
 		end if;
 
 
@@ -290,7 +294,11 @@ begin
 		elsif hcount>px312 and hcount<px301 then
 			posx<=px312;
 			value<='0' & number_sol(51 downto 48);
+		else 
+			null;
 		end if;
+	else
+		null;
 	end if;
 end process;
 
