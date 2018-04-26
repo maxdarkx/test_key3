@@ -43,10 +43,11 @@ port(
 		number1: 	 	 in  std_logic_vector(51 downto 0);
 		number2: 	 	 in  std_logic_vector(51 downto 0);
 		number_sol: 	 in  std_logic_vector(51 downto 0);
+		op:				in std_logic_vector(4 downto 0);
 		hcount:      in  std_logic_vector(10 downto 0);
 	   vcount:      in  std_logic_vector(10 downto 0);
-		posx: 		 out integer;
-		posy:		 	 out integer;
+		posx: 		 out integer range 0 to 480;
+		posy:		 	 out integer range 0 to 640;
 		value:		 out std_logic_vector(4 downto 0)
 	);
 
@@ -73,7 +74,7 @@ architecture Behavioral of digits_show is
 
 begin
 
-print: process(hcount,vcount)
+print: process(hcount,vcount,number1,op,number2,number_sol)
 	variable esl : integer := dl+lw; --espacio entre palabras
 
 	variable EVU : integer; -- espacio vertical utilizado
@@ -198,7 +199,7 @@ begin
 			value<='0' & number1(51 downto 48);
 		elsif hcount>px113 and hcount<px101 then --espacio reservado para la operacion
 			posx<=px113;
-			value<="10000";
+			value<=op;
 		else
 			null;
 		end if;

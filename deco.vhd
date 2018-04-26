@@ -28,6 +28,6 @@ begin
 					"0111110" when "11101", --D reservado para division
 					"1001111" when "11110", --# 'E' reservado para igual
 					"1000111" when "01111", --* 'F' reservado para punto
-					"0000000" when "10000", -- display apagado
+					"0000000" when "01010", -- display apagado
 					"0000000" when others;
 end behavioral;

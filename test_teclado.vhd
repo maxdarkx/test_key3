@@ -87,7 +87,7 @@ BEGIN
    stim_proc: process
    begin		
    
-	wait for 80ms;
+	wait for 200ms;
 	columnas <= "0010";
 	wait for 40 ms;
 	columnas <="0000";
