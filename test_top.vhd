@@ -14,6 +14,8 @@ entity test_top is
 		led:			out std_logic_vector(7 downto 0);
 		hs: 			out std_logic;						--senales para la pantalla
 		vs: 			out std_logic;
+		hcount:		out std_logic_vector(10 downto 0);
+		vcount:		out std_logic_vector(10 downto 0);
 		rgb:			out std_logic_vector(7 downto 0)
 	);
 	attribute loc: string;
@@ -150,8 +152,10 @@ architecture test_design of test_top is
   	signal val1: std_logic_vector(4 downto 0);
   	signal status: std_logic_vector(3 downto 0);
 	signal op: std_logic_vector(4 downto 0);
-begin
 	
+begin
+	hcount<=hcount1;
+	vcount<=vcount1;
 	
 	key0: debouncer
 	port map(
