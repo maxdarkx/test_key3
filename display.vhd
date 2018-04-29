@@ -27,7 +27,7 @@ architecture Behavioral of Display is
 	
 	component deco
 	Port (  
-			val : in  STD_LOGIC_VECTOR (4 downto 0);
+			   val : in  STD_LOGIC_VECTOR (4 downto 0);
             seg : out  STD_LOGIC_VECTOR (6 downto 0)
         );
 	end component;	
@@ -35,7 +35,7 @@ begin
 
 	
 	
-	decodificador: deco port map(
+decodificador: deco port map(
 		val	=>	 VALUE,
 		seg 	=>	 seg
 	);

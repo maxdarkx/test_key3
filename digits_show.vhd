@@ -40,9 +40,9 @@ generic (
 		lw: integer:=5
 	);
 port(	
-		number1: 	 	 in  std_logic_vector(51 downto 0);
-		number2: 	 	 in  std_logic_vector(51 downto 0);
-		number_sol: 	 in  std_logic_vector(51 downto 0);
+		number1: 	 	 in  std_logic_vector(59 downto 0);
+		number2: 	 	 in  std_logic_vector(59 downto 0);
+		number_sol: 	 in  std_logic_vector(59 downto 0);
 		op:				in std_logic_vector(4 downto 0);
 		hcount:      in  std_logic_vector(10 downto 0);
 	   vcount:      in  std_logic_vector(10 downto 0);
@@ -94,14 +94,25 @@ begin
 	EHU2:= cc2*(dl+esh) ;
 	EHU3:= cc3*(dl+esh) ;
 	
-	px1 := (th-ehu1)/2 ;
-	px2 := (th-ehu2)/2;
-	px3 := (th-ehu3)/2;
+	px1 := 0;
+	px2 := 0;
+	px3 := 0;
 
-	py1 := (tv - EVU)/2;
-	py2:=py1+dh+esl;											   
-	py3:=py1+2*dh+esl;
-	py4:=py1+3*dh+esl;	
+	py1 := 0;
+	py2 := py1+dh+esl;
+	py3 := py2+dh+esl;
+	py4 := py3+dh+esl;
+
+
+--para centrar
+	--px1 := (th-ehu1)/2 ;
+	--px2 := (th-ehu2)/2;
+	--px3 := (th-ehu3)/2;
+
+	--py1 := (tv - EVU)/2;
+	--py2:=py1+dh+esl;											   
+	--py3:=py1+2*dh+esl;
+	--py4:=py1+3*dh+esl;	
 
 	--simbolos para primer operando
 	px10:= px1;
@@ -113,12 +124,11 @@ begin
 	px16:= px1 + 6*(dl + esh);
 	px17:= px1 + 7*(dl + esh);
 	px18:= px1 + 8*(dl + esh);
-	px19:= px1 + 9*(dl + esh);
+	px19:= px1 + 9*(dl + esh); --punto
 	px110:= px1 + 10*(dl + esh);
 	px111:= px1 + 11*(dl + esh);
 	px112:= px1 + 12*(dl + esh);
-	px113:= px1 + 13*(dl + esh);
-	px101:= px1 + 14*(dl + esh);
+	px101:= px1 + 13*(dl + esh);
 
 	--simbolos para segundo operando
 	px20:= px2;
@@ -130,28 +140,27 @@ begin
 	px26:= px2 + 6*(dl + esh);
 	px27:= px2 + 7*(dl + esh);
 	px28:= px2 + 8*(dl + esh);
-	px29:= px2 + 9*(dl + esh);
+	px29:= px2 + 9*(dl + esh);--punto
 	px210:= px2 + 10*(dl + esh);
 	px211:= px2 + 11*(dl + esh);
 	px212:= px2 + 12*(dl + esh);
-	px201:= px2 + 13*(dl + esh);
-
+	px201:= px2 + 12*(dl + esh);
 	--simbolos para resultado
-	px30:= px3;
-	px31:= px3 + dl + esh;
-	px32:= px3 + 2*(dl + esh);
-	px33:= px3 + 3*(dl + esh);
-	px34:= px3 + 4*(dl + esh);
-	px35:= px3 + 5*(dl + esh);
-	px36:= px3 + 6*(dl + esh);
-	px37:= px3 + 7*(dl + esh);
-	px38:= px3 + 8*(dl + esh);
-	px39:= px3 + 9*(dl + esh);
-	px310:= px3 + 10*(dl + esh);
-	px311:= px3 + 11*(dl + esh);
-	px312:= px3 + 12*(dl + esh);
-	px301:= px3 + 13*(dl + esh);
-	
+--	px30:= px3;
+--	px31:= px3 + dl + esh;
+--	px32:= px3 + 2*(dl + esh);
+--	px33:= px3 + 3*(dl + esh);
+--	px34:= px3 + 4*(dl + esh);
+--	px35:= px3 + 5*(dl + esh);
+--	px36:= px3 + 6*(dl + esh);
+--	px37:= px3 + 7*(dl + esh);
+--	px38:= px3 + 8*(dl + esh);
+--	px39:= px3 + 9*(dl + esh);
+--	px310:= px3 + 10*(dl + esh);
+--	px311:= px3 + 11*(dl + esh);
+--	px312:= px3 + 12*(dl + esh);
+--	px301:= px3 + 13*(dl + esh);
+--	
 	
 
 
@@ -160,45 +169,42 @@ begin
 
 		if hcount>px10 and hcount<px11 then
 			posx<=px10;
-			value<='0' & number1(3 downto 0);
+			value<= number1(4 downto 0);
 		elsif hcount>px11 and hcount<px12 then
 			posx<=px11;
-			value<='0' & number1(7 downto 4);
+			value<=number1(9 downto 5);
 		elsif hcount>px12 and hcount<px13 then
 			posx<=px12;
-			value<='0' & number1(11 downto 8);
+			value<=number1(14 downto 10);
 		elsif hcount>px13 and hcount<px14 then
 			posx<=px13;
-			value<='0' & number1(15 downto 12);
+			value<=number1(19 downto 15);
 		elsif hcount>px14 and hcount<px15 then
 			posx<=px14;
-			value<='0' & number1(19 downto 16);
+			value<=number1(24 downto 20);
 		elsif hcount>px15 and hcount<px16 then
 			posx<=px15;
-			value<='0' & number1(23 downto 20);
+			value<=number1(29 downto 25);
 		elsif hcount>px16 and hcount<px17 then
 			posx<=px16;
-			value<='0' & number1(27 downto 24);
+			value<=number1(34 downto 30);
 		elsif hcount>px17 and hcount<px18 then
 			posx<=px17;
-			value<='0' & number1(31 downto 28);
+			value<=number1(39 downto 35);
 		elsif hcount>px18 and hcount<px19 then
 			posx<=px18;
-			value<='0' & number1(35 downto 32);
+			value<=number1(44 downto 40);
 		elsif hcount>px19 and hcount<px110 then
 			posx<=px19;
-			value<='0' & number1(39 downto 36);
+			value<=number1(49 downto 45);
 		elsif hcount>px110 and hcount<px111 then
 			posx<=px110;
-			value<='0' & number1(43 downto 40);
+			value<=number1(54 downto 50);
 		elsif hcount>px111 and hcount<px112 then
 			posx<=px111;
-			value<='0' & number1(47 downto 44);
-		elsif hcount>px112 and hcount<px113 then
+			value<=number1(59 downto 55);
+		elsif hcount>px112 and hcount<px101 then
 			posx<=px112;
-			value<='0' & number1(51 downto 48);
-		elsif hcount>px113 and hcount<px101 then --espacio reservado para la operacion
-			posx<=px113;
 			value<=op;
 		else
 			null;
@@ -211,93 +217,90 @@ begin
 		
 	if hcount>px20 and hcount<px21 then
 			posx<=px20;
-			value<='0' & number2(3 downto 0);
+			value<= number2(4 downto 0);
 		elsif hcount>px21 and hcount<px22 then
 			posx<=px21;
-			value<='0' & number2(7 downto 4);
+			value<= number2(9 downto 5);
 		elsif hcount>px22 and hcount<px23 then
 			posx<=px22;
-			value<='0' & number2(11 downto 8);
+			value<= number2(14 downto 10);
 		elsif hcount>px23 and hcount<px24 then
 			posx<=px23;
-			value<='0' & number2(15 downto 12);
+			value<= number2(19 downto 15);
 		elsif hcount>px24 and hcount<px25 then
 			posx<=px24;
-			value<='0' & number2(19 downto 16);
+			value<= number2(24 downto 20);
 		elsif hcount>px25 and hcount<px26 then
 			posx<=px25;
-			value<='0' & number2(23 downto 20);
+			value<= number2(29 downto 25);
 		elsif hcount>px26 and hcount<px27 then
 			posx<=px26;
-			value<='0' & number2(27 downto 24);
+			value<= number2(34 downto 30);
 		elsif hcount>px27 and hcount<px28 then
 			posx<=px27;
-			value<='0' & number2(31 downto 28);
+			value<= number2(39 downto 35);
 		elsif hcount>px28 and hcount<px29 then
 			posx<=px28;
-			value<='0' & number2(35 downto 32);
+			value<= number2(44 downto 40);
 		elsif hcount>px29 and hcount<px210 then
 			posx<=px29;
-			value<='0' & number2(39 downto 36);
+			value<= number2(49 downto 45);
 		elsif hcount>px210 and hcount<px211 then
 			posx<=px210;
-			value<='0' & number2(43 downto 40);
-		elsif hcount>px211 and hcount<px212 then
+			value<= number2(54 downto 50);
+		elsif hcount>px211 and hcount<px201 then
 			posx<=px211;
-			value<='0' & number2(47 downto 44);
-		elsif hcount>px212 and hcount<px201 then
-			posx<=px212;
-			value<='0' & number2(51 downto 48);
+			value<= number2(59 downto 55);
 		else
 			null;
 		end if;
 
 
-	elsif vcount > py3 and vcount < py4 then --resultado
-		posy<=py3;
+--	elsif vcount > py3 and vcount < py4 then --resultado
+--		posy<=py3;
 		
-	if hcount>px30 and hcount<px31 then
-			posx<=px30;
-			value<='0' & number_sol(3 downto 0);
-		elsif hcount>px31 and hcount<px32 then
-			posx<=px31;
-			value<='0' & number_sol(7 downto 4);
-		elsif hcount>px32 and hcount<px33 then
-			posx<=px32;
-			value<='0' & number_sol(11 downto 8);
-		elsif hcount>px33 and hcount<px34 then
-			posx<=px33;
-			value<='0' & number_sol(15 downto 12);
-		elsif hcount>px34 and hcount<px35 then
-			posx<=px34;
-			value<='0' & number_sol(19 downto 16);
-		elsif hcount>px35 and hcount<px36 then
-			posx<=px35;
-			value<='0' & number_sol(23 downto 20);
-		elsif hcount>px36 and hcount<px37 then
-			posx<=px36;
-			value<='0' & number_sol(27 downto 24);
-		elsif hcount>px37 and hcount<px38 then
-			posx<=px37;
-			value<='0' & number_sol(31 downto 28);
-		elsif hcount>px38 and hcount<px39 then
-			posx<=px38;
-			value<='0' & number_sol(35 downto 32);
-		elsif hcount>px39 and hcount<px310 then
-			posx<=px39;
-			value<='0' & number_sol(39 downto 36);
-		elsif hcount>px310 and hcount<px311 then
-			posx<=px310;
-			value<='0' & number_sol(43 downto 40);
-		elsif hcount>px311 and hcount<px312 then
-			posx<=px311;
-			value<='0' & number_sol(47 downto 44);
-		elsif hcount>px312 and hcount<px301 then
-			posx<=px312;
-			value<='0' & number_sol(51 downto 48);
-		else 
-			null;
-		end if;
+--		if hcount>px30 and hcount<px31 then
+--			posx<=px30;
+--			value<='0' & number_sol(3 downto 0);
+--		elsif hcount>px31 and hcount<px32 then
+--			posx<=px31;
+--			value<='0' & number_sol(7 downto 4);
+--		elsif hcount>px32 and hcount<px33 then
+--			posx<=px32;
+--			value<='0' & number_sol(11 downto 8);
+--		elsif hcount>px33 and hcount<px34 then
+--			posx<=px33;
+--			value<='0' & number_sol(15 downto 12);
+--		elsif hcount>px34 and hcount<px35 then
+--			posx<=px34;
+--			value<='0' & number_sol(19 downto 16);
+--		elsif hcount>px35 and hcount<px36 then
+--			posx<=px35;
+--			value<='0' & number_sol(23 downto 20);
+--		elsif hcount>px36 and hcount<px37 then
+--			posx<=px36;
+--			value<='0' & number_sol(27 downto 24);
+--		elsif hcount>px37 and hcount<px38 then
+--			posx<=px37;
+--			value<='0' & number_sol(31 downto 28);
+--		elsif hcount>px38 and hcount<px39 then
+--			posx<=px38;
+--			value<='0' & number_sol(35 downto 32);
+--		elsif hcount>px39 and hcount<px310 then
+--			posx<=px39;
+--			value<='0' & number_sol(39 downto 36);
+--		elsif hcount>px310 and hcount<px311 then
+--			posx<=px310;
+--			value<='0' & number_sol(43 downto 40);
+--		elsif hcount>px311 and hcount<px312 then
+--			posx<=px311;
+--			value<='0' & number_sol(47 downto 44);
+--		elsif hcount>px312 and hcount<px301 then
+--			posx<=px312;
+--			value<='0' & number_sol(51 downto 48);
+--		else 
+--			null;
+--		end if;
 	else
 		null;
 	end if;
